@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1258c8">
+<title>PortalXpress | Service Management</title>
+<style>
+:root{--blue:#1459c7;--blue2:#0d3f98;--pale:#eef5ff;--ink:#17243b;--muted:#68778f;--line:#e3eaf4;--white:#fff;--green:#13865b;--amber:#a76608;--red:#bf3948}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fc;color:var(--ink);font:15px/1.5 Arial,Helvetica,sans-serif}
+header{background:linear-gradient(115deg,#0c3c91,#1768df);color:#fff;padding:18px max(20px,calc((100% - 1160px)/2));display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-size:24px;font-weight:800;letter-spacing:.2px}.brand span{color:#bcd7ff}.tag{font-size:12px;color:#d9e8ff}
+main{max-width:1160px;margin:26px auto;padding:0 18px}.hero{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:0 8px 24px #1d3b6610}.hero h1{margin:0 0 6px;font-size:25px}.hero p{margin:0;color:var(--muted)}.pill{background:#e8f2ff;color:var(--blue);padding:7px 12px;border-radius:30px;font-size:12px;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.tab,button{border:0;border-radius:10px;padding:11px 15px;font-weight:700;cursor:pointer}.tab{background:#e8eef8;color:#42536d}.tab.active,button.primary{background:var(--blue);color:#fff}.tab:hover,button:hover{filter:brightness(.97)}button.secondary{background:#eaf1fc;color:var(--blue)}button.danger{background:#fff0f1;color:var(--red)}button.small{padding:7px 10px;font-size:12px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 5px 18px #1d3b6609;margin-bottom:18px}.panel h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:18px 0}.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:26px;margin-top:5px;color:var(--blue)}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-size:13px;font-weight:700;color:#41516a}input,select,textarea{width:100%;padding:11px 12px;border:1px solid #d5deeb;border-radius:9px;font:inherit;color:var(--ink);background:#fff}textarea{min-height:80px;resize:vertical}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:650px}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);font-size:13px}th{color:#61718a;background:#f7f9fd;font-size:12px;text-transform:uppercase;letter-spacing:.4px}.status{display:inline-block;padding:5px 9px;border-radius:20px;font-size:11px;font-weight:700;background:#edf1f6;color:#56657b}.status.Pending{background:#fff4df;color:var(--amber)}.status.Processing{background:#e8f2ff;color:var(--blue)}.status.Completed{background:#e6f7ef;color:var(--green)}.status.Rejected{background:#ffedef;color:var(--red)}
+.notice{background:#fff8e8;border:1px solid #f4dfad;color:#79540d;border-radius:10px;padding:12px 14px;font-size:13px;margin-bottom:16px}.muted{color:var(--muted)}.hidden{display:none!important}.loginbox{max-width:460px;margin:30px auto}.loginbox p{color:var(--muted)}.empty{text-align:center;padding:25px;color:var(--muted)}footer{text-align:center;color:#8491a5;font-size:12px;padding:22px}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}.hero{align-items:flex-start;flex-direction:column}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}main{margin:16px auto}.panel{padding:15px}}
+</style>
+</head>
+<body>
+<header><div><div class="brand">Portal<span>Xpress</span></div><div class="tag">ONLINE SERVICE & WORK MANAGEMENT</div></div><div id="headerRight" class="tag">Simple • Fast • Organized</div></header>
+<main>
+<section class="hero"><div><h1>Welcome to PortalXpress</h1><p>Manage service requests and track work progress in one place.</p></div><span class="pill">BLUE & WHITE EDITION</span></section>
+<div class="tabs" id="roleTabs">
+<button class="tab active" data-role="Retailer">Retailer</button><button class="tab" data-role="Distributor">Distributor</button><button class="tab" data-role="Admin">Admin</button>
+</div>
+<div class="notice"><strong>Demo version:</strong> This website is a front-end prototype. Demo records are saved only in this browser. Secure accounts, shared live data, OTP, payments and real government-service integrations require a proper backend and authorized provider access.</div>
+<section id="login" class="panel loginbox">
+<h2 id="loginTitle">Retailer Demo Access</h2><p>Choose a panel above to preview its dashboard. This prototype uses demo access and does not collect real passwords.</p>
+<div class="field"><label for="demoName">Your display name</label><input id="demoName" placeholder="e.g. Demo Retailer" value="Demo User"></div>
+<div class="actions"><button class="primary" id="enterBtn">Open Dashboard</button></div>
+</section>
+<section id="dashboard" class="hidden">
+<div class="hero"><div><h1 id="welcomeTitle">Dashboard</h1><p id="welcomeSub">Manage your work requests.</p></div><button class="secondary" id="switchBtn">Switch panel</button></div>
+<div class="grid">
+<div class="stat"><small>Total requests</small><strong id="totalCount">0</strong></div><div class="stat"><small>Pending</small><strong id="pendingCount">0</strong></div><div class="stat"><small>Processing</small><strong id="processingCount">0</strong></div><div class="stat"><small>Completed</small><strong id="completedCount">0</strong></div>
+</div>
+<div id="newRequest" class="panel">
+<h2>Create a service request</h2>
+<div class="fields">
+<div class="field"><label for="customer">Customer / applicant name</label><input id="customer" placeholder="Enter name"></div>
+<div class="field"><label for="service">Service name</label><select id="service"><option>Voter ID service</option><option>PAN Card service</option><option>Ration Card service</option><option>Farmer ID service</option><option>Certificate / document service</option><option>Other</option></select></div>
+<div class="field"><label for="mobile">Mobile number (demo only)</label><input id="mobile" inputmode="numeric" maxlength="10" placeholder="10-digit number"></div>
+<div class="field"><label for="assigned">Distributor / assigned to</label><input id="assigned" placeholder="Optional"></div>
+<div class="field full"><label for="details">Work details</label><textarea id="details" placeholder="Add a short description. Do not enter passwords, OTPs or sensitive identity details."></textarea></div>
+</div><div class="actions"><button class="primary" id="addRequest">Submit request</button></div>
+</div>
+<div class="panel"><h2>Work status tracker</h2><p class="muted">Track each request by its reference number. Admin can change the demo status.</p>
+<div class="tablewrap"><table><thead><tr><th>Reference</th><th>Applicant</th><th>Service</th><th>Assigned to</th><th>Status</th><th>Updated</th><th id="actionHead">Action</th></tr></thead><tbody id="requestRows"></tbody></table></div><div id="emptyState" class="empty hidden">No requests yet. Create a demo request to get started.</div></div>
+</section>
+</main>
+<footer>© 2026 PortalXpress • Prototype for demonstration</footer>
+<script>
+const KEY='portalxpress_demo_requests_v1';let role='Retailer',user='Demo User';
+const $=id=>document.getElementById(id);
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+function save(items){localStorage.setItem(KEY,JSON.stringify(items))}
+function setRole(r){role=r;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.role===r));$('loginTitle').textContent=r+' Demo Access';$('login').classList.remove('hidden');$('dashboard').classList.add('hidden')}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>setRole(b.dataset.role)));
+$('enterBtn').addEventListener('click',()=>{user=$('demoName').value.trim()||'Demo User';$('login').classList.add('hidden');$('dashboard').classList.remove('hidden');$('welcomeTitle').textContent=role+' Dashboard';$('welcomeSub').textContent='Welcome, '+user+'. '+(role==='Admin'?'Review requests and update work status.':role==='Distributor'?'Review assigned work and follow progress.':'Submit requests and track your work.');$('newRequest').classList.toggle('hidden',role!=='Retailer');render()});
+$('switchBtn').addEventListener('click',()=>{$('dashboard').classList.add('hidden');$('login').classList.remove('hidden')});
+$('addRequest').addEventListener('click',()=>{let customer=$('customer').value.trim();if(!customer){alert('Please enter the applicant name.');return}let items=load();let ref='PX'+Date.now().toString().slice(-7);items.unshift({ref,customer,service:$('service').value,mobile:$('mobile').value.trim(),assigned:$('assigned').value.trim()||'Not assigned',details:$('details').value.trim(),status:'Pending',updated:new Date().toLocaleString(),createdBy:user});save(items);['customer','mobile','assigned','details'].forEach(id=>$(id).value='');render();alert('Demo request created. Reference: '+ref)});
+function render(){let items=load();$('totalCount').textContent=items.length;$('pendingCount').textContent=items.filter(x=>x.status==='Pending').length;$('processingCount').textContent=items.filter(x=>x.status==='Processing').length;$('completedCount').textContent=items.filter(x=>x.status==='Completed').length;$('emptyState').classList.toggle('hidden',items.length>0);$('actionHead').textContent=role==='Admin'?'Update status':'Details';$('requestRows').innerHTML=items.map(x=>`<tr><td><strong>${esc(x.ref)}</strong></td><td>${esc(x.customer)}</td><td>${esc(x.service)}</td><td>${esc(x.assigned)}</td><td><span class="status ${esc(x.status)}">${esc(x.status)}</span></td><td>${esc(x.updated)}</td><td>${role==='Admin'?`<select aria-label="Change status" onchange="changeStatus('${esc(x.ref)}',this.value)"><option ${x.status==='Pending'?'selected':''}>Pending</option><option ${x.status==='Processing'?'selected':''}>Processing</option><option ${x.status==='Completed'?'selected':''}>Completed</option><option ${x.status==='Rejected'?'selected':''}>Rejected</option></select>`:`<button class="secondary small" onclick="showDetails('${esc(x.ref)}')">View</button>`}</td></tr>`).join('')}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+window.changeStatus=(ref,status)=>{if(role!=='Admin')return;let items=load();let x=items.find(a=>a.ref===ref);if(x){x.status=status;x.updated=new Date().toLocaleString();save(items);render()}};
+window.showDetails=ref=>{let x=load().find(a=>a.ref===ref);if(x)alert('Reference: '+x.ref+'\nApplicant: '+x.customer+'\nService: '+x.service+'\nStatus: '+x.status+'\nDetails: '+(x.details||'Not provided'))};
+</script>
+</body></html>
